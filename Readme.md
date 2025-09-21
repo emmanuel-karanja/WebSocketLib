@@ -111,15 +111,26 @@ docker-compose down
 
 ```
 WebSocketLib/
-├── WebSocketUtils/              # Core WebSocket library
-│   ├── Connection/              # Connection manager
-│   ├── Middleware/              # Logging & telemetry
-├── WebSocketUtils.Demo/         # Demo API project
-│   ├── Controllers/             # WebSocketController
-│   ├── Services/                # Message services
-├── docker-compose.yml           # Docker setup (API + Kafka + Redis)
-├── .gitignore                   # Git ignore file
-└── README.md                    # Project documentation
+│
+├── WebSocketUtils/                # Core WebSocket utilities
+│   ├── Connection/                 # Connection manager & handlers
+│   ├── Middleware/                 # Logging & telemetry middleware
+│   ├── WebSocketUtils.csproj
+│
+├── WebSocketUtils.Demo/           # Demo ASP.NET Core project
+│   ├── Controllers/                # WebSocket endpoints
+│   ├── Extensions/                 # Extension methods for DI/config
+│   ├── Options/                    # Options & configuration bindings
+│   ├── Services/                   # Demo services (Kafka, Redis)
+│   ├── WebSocketUtils.Demo.csproj
+│
+├── WebSocketUtils.Tests/          # Unit and integration tests
+│
+├── docker-compose.yml             # Local environment (WebSocket + Kafka + Redis)
+├── Dockerfile                     # Container build file
+├── .gitignore
+├── README.md
+                  # Project documentation
 ```
 
 ---
