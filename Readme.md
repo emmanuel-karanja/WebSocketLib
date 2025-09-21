@@ -1,32 +1,18 @@
 # WebSocketLib
 
-A lightweight **WebSocket utility library** built on ASP.NET Core for managing real-time connections, broadcasting, and direct messaging between clients.
+A .NET library for managing **WebSocket connections** with support for **message broadcasting, direct messaging, Kafka integration, and Redis caching**. Built with ASP.NET Core and designed for scalable real-time communication.
 
 ---
 
 ## ✨ Features
 
-* 🔌 Brokered connection manager for tracking clients
-* 📡 Broadcast messages to all clients
-* 🎯 Send direct messages to a specific client
-* 🧩 Pluggable message handling service (`IWebSocketMessageService`)
-* 🛠 Built with ASP.NET Core and Dependency Injection
-* 🐳 Docker-ready
-
----
-
-## 📂 Project Structure
-
-```
-WebSocketLib/
-│── WebSocketUtils/           # Core library (connection manager, middleware, etc.)
-│── WebSocketUtils.Demo/      # Demo ASP.NET Core app (controllers, services)
-│── WebSocketUtils.Tests/     # Unit tests
-│── Dockerfile                # Docker image build file
-│── docker-compose.yml        # Docker Compose for multi-service setups
-│── .gitignore
-│── README.md
-```
+* Manage multiple WebSocket client connections.
+* Broadcast messages to all clients.
+* Send direct messages to specific clients.
+* Structured message handling with JSON.
+* Kafka integration for message streaming.
+* Redis integration for connection management and caching.
+* Middleware for logging and telemetry.
 
 ---
 
@@ -34,103 +20,113 @@ WebSocketLib/
 
 ### Prerequisites
 
-* [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-* [Docker](https://docs.docker.com/get-docker/) (optional, for containerized runs)
+* [.NET 8 SDK](https://dotnet.microsoft.com/)
+* [Docker](https://www.docker.com/)
+* [Kafka](https://kafka.apache.org/)
+* [Redis](https://redis.io/)
 
----
-
-### Run Locally
+### Clone the repository
 
 ```bash
-# Clone repository
 git clone https://github.com/emmanuel-karanja/WebSocketLib.git
 cd WebSocketLib
+```
 
-# Build & run demo project
+### Build the project
+
+```bash
 dotnet build
+```
+
+### Run locally
+
+```bash
 dotnet run --project WebSocketUtils.Demo
 ```
 
-The WebSocket endpoint will be available at:
+This will start the demo API with the WebSocket endpoint:
 
 ```
-ws://localhost:5000/api/websocket/ws
-```
-
----
-
-### Example Message Formats
-
-#### Broadcast
-
-```json
-{
-  "type": "broadcast",
-  "message": "Hello everyone!"
-}
-```
-
-#### Direct Message
-
-```json
-{
-  "type": "direct",
-  "target": "<target-client-id>",
-  "message": "Hey, just to you!"
-}
+GET ws://localhost:5000/api/websocket/ws
 ```
 
 ---
 
-## 🐳 Docker Support
+## 🐳 Docker Setup
 
-### Build Image
+We provide a **Docker Compose** configuration to run the project along with Kafka and Redis.
 
-```bash
-docker build -t websocketlib-demo -f WebSocketUtils.Demo/Dockerfile .
-```
-
-### Run Container
-
-```bash
-docker run -p 5000:5000 websocketlib-demo
-```
-
-Now connect to:
-
-```
-ws://localhost:5000/api/websocket/ws
-```
-
----
-
-### Docker Compose
-
-You can run multiple services together with **docker-compose**.
-
-Example `docker-compose.yml`:
-
-```yaml
-version: '3.8'
-services:
-  websocket-demo:
-    build:
-      context: .
-      dockerfile: WebSocketUtils.Demo/Dockerfile
-    ports:
-      - "5000:5000"
-    restart: always
-```
-
-Run it:
+### Build and Run with Docker Compose
 
 ```bash
 docker-compose up --build
 ```
 
+This starts:
+
+* **WebSocketLib Demo API** on `http://localhost:5000`
+* **Kafka** broker on `localhost:9092`
+* **Redis** on `localhost:6379`
+
+### Stop services
+
+```bash
+docker-compose down
+```
+
 ---
 
-## 🧪 Running Tests
+## 🔌 Example Usage
+
+### Connecting with Postman or a WebSocket client
+
+1. Open a WebSocket connection to:
+
+   ```
+   ws://localhost:5000/api/websocket/ws
+   ```
+
+2. Send a broadcast message:
+
+   ```json
+   {
+     "type": "broadcast",
+     "message": "Hello everyone!"
+   }
+   ```
+
+3. Send a direct message:
+
+   ```json
+   {
+     "type": "direct",
+     "target": "<client-id>",
+     "message": "Hello friend!"
+   }
+   ```
+
+---
+
+## 📂 Project Structure
+
+```
+WebSocketLib/
+├── WebSocketUtils/              # Core WebSocket library
+│   ├── Connection/              # Connection manager
+│   ├── Middleware/              # Logging & telemetry
+├── WebSocketUtils.Demo/         # Demo API project
+│   ├── Controllers/             # WebSocketController
+│   ├── Services/                # Message services
+├── docker-compose.yml           # Docker setup (API + Kafka + Redis)
+├── .gitignore                   # Git ignore file
+└── README.md                    # Project documentation
+```
+
+---
+
+## 🧪 Testing
+
+Run unit tests:
 
 ```bash
 dotnet test
@@ -138,6 +134,16 @@ dotnet test
 
 ---
 
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/my-feature`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Open a Pull Request.
+
+---
+
 ## 📜 License
 
-MIT License © 2025 \[Emmanuel Karanja]\([https://github.com/emmanuel-kara](https://github.com/emmanuel-kara)
+MIT License. See [LICENSE](LICENSE) for details.
