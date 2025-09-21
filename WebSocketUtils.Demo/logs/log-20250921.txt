@@ -261,3 +261,311 @@ System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an in
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
 2025-09-21 22:23:28.343 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 94838.9304ms
+2025-09-21 22:24:51.311 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:24:51.356 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:24:51.359 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:24:51.361 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:28:08.779 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:28:08.820 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:28:08.827 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:28:08.831 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:28:08.834 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:28:08.839 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:28:08.879 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:28:09.265 +03:00 [INF] Client connected: 25d4c1dd-e9b3-4c8c-bcfe-f166b2027dc5
+2025-09-21 22:28:09.270 +03:00 [INF] Added socket 25d4c1dd-e9b3-4c8c-bcfe-f166b2027dc5
+2025-09-21 22:32:02.918 +03:00 [INF] Application is shutting down...
+2025-09-21 22:32:32.938 +03:00 [INF] Connection cancelled for 25d4c1dd-e9b3-4c8c-bcfe-f166b2027dc5
+2025-09-21 22:32:32.949 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 264060.5613ms
+2025-09-21 22:32:32.958 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:32:32.963 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 264124.0709 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:32:33.023 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 264192.4377 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:32:33.054 +03:00 [ERR] Connection id "0HNFP8JVFNB07", Request id "0HNFP8JVFNB07:00000001": An unhandled exception was thrown by the application.
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at WebSocketUtils.Middleware.CorrelationMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\CorrelationMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-09-21 22:32:33.084 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 264305.1039ms
+2025-09-21 22:54:12.058 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:54:12.102 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:54:12.106 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:54:12.107 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:54:59.823 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:54:59.856 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:54:59.864 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:54:59.869 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:54:59.910 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:55:08.303 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 8381.8094ms
+2025-09-21 22:55:08.311 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:55:08.315 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 8445.4659 ms
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImpl(ConfigurationOptions configuration, TextWriter writer, Nullable`1 serverType, EndPointCollection endpoints) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 689
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 661
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(String configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 639
+   at WebSocketUtils.Brokers.RedisBroker..ctor(String connectionString) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Brokers\RedisBroker.cs:line 11
+   at WebSocketUtils.Extensions.WebSocketServiceCollectionExtensions.<>c__DisplayClass0_0.<AddWebSocketBrokers>b__0(IServiceProvider sp) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Extensions\WebSocketServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method8(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:55:08.357 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 8493.8690 ms
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImpl(ConfigurationOptions configuration, TextWriter writer, Nullable`1 serverType, EndPointCollection endpoints) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 689
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 661
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(String configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 639
+   at WebSocketUtils.Brokers.RedisBroker..ctor(String connectionString) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Brokers\RedisBroker.cs:line 11
+   at WebSocketUtils.Extensions.WebSocketServiceCollectionExtensions.<>c__DisplayClass0_0.<AddWebSocketBrokers>b__0(IServiceProvider sp) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Extensions\WebSocketServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method8(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:55:08.381 +03:00 [ERR] Connection id "0HNFP92VJQACA", Request id "0HNFP92VJQACA:00000001": An unhandled exception was thrown by the application.
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImpl(ConfigurationOptions configuration, TextWriter writer, Nullable`1 serverType, EndPointCollection endpoints) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 689
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 661
+   at StackExchange.Redis.ConnectionMultiplexer.Connect(String configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 639
+   at WebSocketUtils.Brokers.RedisBroker..ctor(String connectionString) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Brokers\RedisBroker.cs:line 11
+   at WebSocketUtils.Extensions.WebSocketServiceCollectionExtensions.<>c__DisplayClass0_0.<AddWebSocketBrokers>b__0(IServiceProvider sp) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Extensions\WebSocketServiceCollectionExtensions.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method8(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at WebSocketUtils.Middleware.CorrelationMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\CorrelationMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-09-21 22:55:08.413 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 500 0 null 8592.1218ms
+2025-09-21 22:55:46.524 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:55:46.537 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:55:46.544 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:55:46.550 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:55:46.556 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:55:46.665 +03:00 [INF] Client connected: 515e8a9b-53d5-4ba8-9853-ad53023054a8
+2025-09-21 22:55:46.672 +03:00 [INF] Added socket 515e8a9b-53d5-4ba8-9853-ad53023054a8
+2025-09-21 22:55:54.432 +03:00 [INF] Removed socket 515e8a9b-53d5-4ba8-9853-ad53023054a8
+2025-09-21 22:55:54.437 +03:00 [INF] Client disconnected: 515e8a9b-53d5-4ba8-9853-ad53023054a8
+2025-09-21 22:55:54.441 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 7876.584ms
+2025-09-21 22:55:54.446 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:55:54.450 +03:00 [INF] HTTP GET /api/websocket/ws responded 101 in 7900.0800 ms
+2025-09-21 22:55:54.456 +03:00 [INF] Request completed in 7906ms
+2025-09-21 22:55:54.460 +03:00 [INF] Request finished: 101
+2025-09-21 22:55:54.464 +03:00 [INF] HTTP GET /api/websocket/ws responded 101 in 7920.1993 ms
+2025-09-21 22:55:54.469 +03:00 [INF] Request completed in 7925ms
+2025-09-21 22:55:54.472 +03:00 [INF] Request finished: 101
+2025-09-21 22:55:54.477 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 7952.4372ms
+2025-09-21 22:55:57.086 +03:00 [INF] Application is shutting down...
+2025-09-21 22:56:20.811 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:56:20.854 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:56:20.860 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:56:20.863 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:56:24.435 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:56:24.470 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:56:24.480 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:56:24.484 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:56:24.532 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:56:24.957 +03:00 [INF] Client connected: 2c52b0cd-faac-4fe0-b1c9-1e303918dec9
+2025-09-21 22:56:24.963 +03:00 [INF] Added socket 2c52b0cd-faac-4fe0-b1c9-1e303918dec9
+2025-09-21 22:56:28.077 +03:00 [INF] Message from 2c52b0cd-faac-4fe0-b1c9-1e303918dec9: {
+    "type":"broadcast",
+    "message":"hello"
+}
+2025-09-21 22:56:28.084 +03:00 [INF] Received message: {
+    "type":"broadcast",
+    "message":"hello"
+}
+2025-09-21 22:56:28.098 +03:00 [INF] Broadcasting message from 2c52b0cd-faac-4fe0-b1c9-1e303918dec9: hello
+2025-09-21 22:56:43.712 +03:00 [INF] Application is shutting down...
+2025-09-21 22:57:13.719 +03:00 [INF] Connection cancelled for 2c52b0cd-faac-4fe0-b1c9-1e303918dec9
+2025-09-21 22:57:13.728 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 49187.9455ms
+2025-09-21 22:57:13.736 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:57:13.740 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 49255.6668 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:57:13.795 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 49316.1699 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:57:13.821 +03:00 [ERR] Connection id "0HNFP93OQN4DJ", Request id "0HNFP93OQN4DJ:00000001": An unhandled exception was thrown by the application.
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 28
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at WebSocketUtils.Middleware.CorrelationMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\CorrelationMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-09-21 22:57:13.853 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 49418.7608ms

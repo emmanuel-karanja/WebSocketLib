@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Serilog.Context;
 
 namespace WebSocketUtils.Middleware
 {
@@ -21,15 +21,15 @@ namespace WebSocketUtils.Middleware
         {
             var sw = Stopwatch.StartNew();
 
+            // Include request path and method in the LogContext
             using (LogContext.PushProperty("RequestPath", context.Request.Path))
             using (LogContext.PushProperty("RequestMethod", context.Request.Method))
             {
-                _logger.LogInformation("Incoming HTTP request");
-
-                await _next(context); // pass down the pipeline
+                await _next(context); // propagate
 
                 sw.Stop();
-                _logger.LogInformation("Completed HTTP request in {Elapsed}ms", sw.ElapsedMilliseconds);
+                _logger.LogInformation("Request completed in {ElapsedMilliseconds}ms",
+                    sw.ElapsedMilliseconds);
             }
         }
     }

@@ -13,9 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Setup Serilog from configuration
 // ----------------------------
 Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration) // read from appsettings.json
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext() // Uses LogContext for correlation
+    .Enrich.WithProperty("Application", "WebSocketDemo") // optional static property
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 

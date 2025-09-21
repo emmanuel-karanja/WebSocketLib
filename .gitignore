@@ -25,7 +25,7 @@ packages/
 # Generated files
 Generated/
 Generated_Code/
-
+logs/
 # Tests
 TestResults/
 coverage/
