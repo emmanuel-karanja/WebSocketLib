@@ -1,21 +1,25 @@
-﻿using WebSocketUtils.Demo.Extensions;
-using WebSocketUtils.Connection;
+﻿using WebSocketUtils.Connection;
 using Serilog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using WebSocketUtils.Services;
 using WebSocketUtils.Demo.Services;
+using WebSocketUtils.Extensions;
+using WebSocketUtils.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ----------------------------
 // Setup Serilog from configuration
 // ----------------------------
-builder.Host.UseSerilog((ctx, lc) =>
-    lc.ReadFrom.Configuration(ctx.Configuration)
-      .Enrich.FromLogContext()
-      .WriteTo.Console()
-);
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) // read from appsettings.json
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // ----------------------------
 // Register brokers and connection manager via extension method
@@ -28,31 +32,36 @@ builder.Services.AddWebSocketBrokers(options =>
 });
 
 builder.Services.AddSingleton<BrokeredConnectionManager>();
-builder.Services.AddSingleton<IWebSocketMessageService, WebSocketMessageService>();
-
+builder.Services.AddSingleton<IWebSocketService, NotificationWebService>();
 
 // Add controllers
 builder.Services.AddControllers();
 
-// ----------------------------
-// Build app
-// ----------------------------
 var app = builder.Build();
 
 // ----------------------------
 // Middleware pipeline
 // ----------------------------
+// CorrelationID added
+// Correlation first
+app.UseMiddleware<CorrelationMiddleware>();
 
-// Logging & telemetry
+// Then your logging & telemetry
 app.UseLoggingAndTelemetry();
+
+// Built-in Serilog request logging
+app.UseSerilogRequestLogging();
+
+// Request logging and telemetry (custom middlewares)
+app.UseLoggingAndTelemetry();
+
+// Built-in ASP.NET logging (optional, but helps debug)
+app.UseSerilogRequestLogging();
 
 // Enable WebSockets globally
 app.UseWebSockets();
 
-// Map controllers (WebSocketController handles /ws)
+// Map controllers (WebSocketController handles /api/websocket/ws)
 app.MapControllers();
 
-// ----------------------------
-// Run the application
-// ----------------------------
 app.Run();

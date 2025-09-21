@@ -1,20 +1,36 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Serilog.Context;
 
 namespace WebSocketUtils.Middleware
 {
     public class TelemetryMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<TelemetryMiddleware> _logger;
 
-        public TelemetryMiddleware(RequestDelegate next) => _next = next;
+        public TelemetryMiddleware(RequestDelegate next, ILogger<TelemetryMiddleware> logger)
+        {
+            _next = next;
+            _logger = logger;
+        }
 
         public async Task InvokeAsync(HttpContext context)
         {
             var sw = Stopwatch.StartNew();
-            await _next(context);
-            sw.Stop();
-            Console.WriteLine($"Request {context.Request.Path} took {sw.ElapsedMilliseconds}ms");
+
+            using (LogContext.PushProperty("RequestPath", context.Request.Path))
+            using (LogContext.PushProperty("RequestMethod", context.Request.Method))
+            {
+                _logger.LogInformation("Incoming HTTP request");
+
+                await _next(context); // pass down the pipeline
+
+                sw.Stop();
+                _logger.LogInformation("Completed HTTP request in {Elapsed}ms", sw.ElapsedMilliseconds);
+            }
         }
     }
 }

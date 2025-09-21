@@ -9,6 +9,7 @@
   <ItemGroup>
     <!-- WebSockets & Core dependencies -->
     <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version=" 2.3.0" />
+     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     
     <!-- Redis -->
     <PackageReference Include="StackExchange.Redis" Version="2.9.17" />

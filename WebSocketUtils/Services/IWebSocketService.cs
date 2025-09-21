@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebSocketUtils.Demo.Services
+namespace WebSocketUtils.Services
 {
-    public interface IWebSocketMessageService
+    public interface IWebSocketService
     {
         Task HandleMessageAsync(string clientId, string messageText, CancellationToken cancellationToken);
     }

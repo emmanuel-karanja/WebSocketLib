@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WebSocketUtils.Connection;
-using WebSocketUtils.Demo.Services;
+using WebSocketUtils.Services;
 
 namespace WebSocketUtils.Demo.Controllers
 {
@@ -15,12 +15,12 @@ namespace WebSocketUtils.Demo.Controllers
     public class WebSocketController : ControllerBase
     {
         private readonly BrokeredConnectionManager _manager;
-        private readonly IWebSocketMessageService _messageHandler;  // 👈 use the interface
+        private readonly IWebSocketService _messageHandler;  // 👈 use the interface
         private readonly ILogger<WebSocketController> _logger;
 
         public WebSocketController(
             BrokeredConnectionManager manager,
-            IWebSocketMessageService messageHandler,  // 👈 inject interface
+            IWebSocketService messageHandler,  // 👈 inject interface
             ILogger<WebSocketController> logger)
         {
             _manager = manager ?? throw new ArgumentNullException(nameof(manager));

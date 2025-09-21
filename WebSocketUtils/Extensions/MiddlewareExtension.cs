@@ -1,7 +1,7 @@
 using WebSocketUtils.Middleware;
 using Microsoft.AspNetCore.Builder;
 
-namespace WebSocketUtils.Demo.Extensions
+namespace WebSocketUtils.Extensions
 {
     public static class MiddlewareExtensions
     {

@@ -1,0 +1,263 @@
+2025-09-21 22:16:19.235 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-09-21 22:16:19.311 +03:00 [DBG] Hosting starting
+2025-09-21 22:16:19.345 +03:00 [DBG] No listening endpoints were configured. Binding to http://localhost:5000 by default.
+2025-09-21 22:16:19.349 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:16:19.352 +03:00 [DBG] Loaded hosting startup assembly WebSocketUtils.Demo
+2025-09-21 22:16:19.354 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:16:19.355 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:16:19.355 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:16:19.356 +03:00 [DBG] Hosting started
+2025-09-21 22:16:24.634 +03:00 [DBG] Connection id "0HNFP8DDKOHFL" accepted.
+2025-09-21 22:16:24.637 +03:00 [DBG] Connection id "0HNFP8DDKOHFL" started.
+2025-09-21 22:16:24.672 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:16:24.681 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-09-21 22:16:24.707 +03:00 [DBG] 1 candidate(s) found for the request path '/api/websocket/ws'
+2025-09-21 22:16:24.713 +03:00 [DBG] Endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)' with route pattern 'api/WebSocket/ws' is valid for the request path '/api/websocket/ws'
+2025-09-21 22:16:24.719 +03:00 [DBG] Request matched endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:16:24.731 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:16:24.737 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:16:24.741 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:16:24.780 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:16:24.788 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-09-21 22:16:24.791 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-09-21 22:16:24.795 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-09-21 22:16:24.798 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-09-21 22:16:24.801 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-09-21 22:16:24.805 +03:00 [DBG] Executing controller factory for controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo)
+2025-09-21 22:16:25.223 +03:00 [DBG] Executed controller factory for controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo)
+2025-09-21 22:16:25.244 +03:00 [INF] Client connected: 7ffb0e14-d438-44ba-b60d-2aa03a4223da
+2025-09-21 22:16:25.246 +03:00 [INF] Added socket 7ffb0e14-d438-44ba-b60d-2aa03a4223da
+2025-09-21 22:16:27.466 +03:00 [INF] Message from 7ffb0e14-d438-44ba-b60d-2aa03a4223da: {
+  "type": "broadcast",
+  "message": "Hello everyone!"
+}
+
+2025-09-21 22:16:27.479 +03:00 [INF] Broadcasting message from 7ffb0e14-d438-44ba-b60d-2aa03a4223da: Hello everyone!
+2025-09-21 22:17:33.273 +03:00 [DBG] Config reload token fired. Checking for changes...
+2025-09-21 22:17:33.532 +03:00 [DBG] Config reload token fired. Checking for changes...
+2025-09-21 22:17:33.793 +03:00 [DBG] Config reload token fired. Checking for changes...
+2025-09-21 22:19:03.436 +03:00 [INF] Application is shutting down...
+2025-09-21 22:19:03.437 +03:00 [DBG] Hosting stopping
+2025-09-21 22:19:33.448 +03:00 [DBG] Some connections failed to close gracefully during server shutdown.
+2025-09-21 22:19:33.449 +03:00 [DBG] Connection id "0HNFP8DDKOHFL" sending RST because: "The connection was aborted because the server is shutting down and request processing didn't complete within the time specified by HostOptions.ShutdownTimeout."
+2025-09-21 22:19:33.452 +03:00 [DBG] Connection id "0HNFP8DDKOHFL" disconnecting.
+2025-09-21 22:19:33.453 +03:00 [INF] Connection cancelled for 7ffb0e14-d438-44ba-b60d-2aa03a4223da
+2025-09-21 22:19:33.465 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 188658.9369ms
+2025-09-21 22:19:33.472 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:19:33.476 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 188733.7808 ms
+Microsoft.AspNetCore.Connections.ConnectionAbortedException: The connection was aborted because the server is shutting down and request processing didn't complete within the time specified by HostOptions.ShutdownTimeout.
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.Http1UpgradeMessageBody.ReadAsyncInternal(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestStream.ReadAsyncInternal(Memory`1 destination, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsyncPrivate(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:19:33.533 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 188796.2074 ms
+Microsoft.AspNetCore.Connections.ConnectionAbortedException: The connection was aborted because the server is shutting down and request processing didn't complete within the time specified by HostOptions.ShutdownTimeout.
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.Http1UpgradeMessageBody.ReadAsyncInternal(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestStream.ReadAsyncInternal(Memory`1 destination, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsyncPrivate(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 27
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:19:33.557 +03:00 [DBG] Connection id "0HNFP8DDKOHFL", Request id "0HNFP8DDKOHFL:00000001": The request was aborted by the client.
+2025-09-21 22:19:33.563 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 188892.7466ms
+2025-09-21 22:19:33.577 +03:00 [DBG] Connection id "0HNFP8DDKOHFL" stopped.
+2025-09-21 22:19:33.583 +03:00 [DBG] Hosting stopped
+2025-09-21 22:20:02.969 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:20:03.014 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:20:03.018 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:20:03.020 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:20:09.952 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:20:09.989 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:20:09.995 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:20:10.001 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:20:10.005 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:20:10.009 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:20:10.055 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:20:10.560 +03:00 [INF] Client connected: 5f1ade11-b190-4f83-a6f5-9935e6a8dc04
+2025-09-21 22:20:10.566 +03:00 [INF] Added socket 5f1ade11-b190-4f83-a6f5-9935e6a8dc04
+2025-09-21 22:20:22.326 +03:00 [INF] Message from 5f1ade11-b190-4f83-a6f5-9935e6a8dc04: {
+  "type": "broadcast",
+  "message": "Hello everyone!"
+}
+
+2025-09-21 22:20:22.331 +03:00 [INF] Received message: {
+  "type": "broadcast",
+  "message": "Hello everyone!"
+}
+
+2025-09-21 22:20:22.340 +03:00 [INF] Broadcasting message from 5f1ade11-b190-4f83-a6f5-9935e6a8dc04: Hello everyone!
+2025-09-21 22:20:47.623 +03:00 [INF] Message from 5f1ade11-b190-4f83-a6f5-9935e6a8dc04: {
+  "type": "direct",
+  "message": "Hello everyone!"
+}
+
+2025-09-21 22:20:47.629 +03:00 [INF] Received message: {
+  "type": "direct",
+  "message": "Hello everyone!"
+}
+
+2025-09-21 22:20:47.634 +03:00 [ERR] Error handling WebSocket for 5f1ade11-b190-4f83-a6f5-9935e6a8dc04
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Text.Json.JsonElement.GetProperty(String propertyName)
+   at WebSocketUtils.Demo.Services.NotificationWebService.HandleDirectAsync(String clientId, JsonDocument doc, CancellationToken cancellationToken) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\Services\NotificationWebService.cs:line 73
+   at WebSocketUtils.Demo.Services.NotificationWebService.HandleMessageAsync(String clientId, String messageText, CancellationToken cancellationToken) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\Services\NotificationWebService.cs:line 43
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 67
+2025-09-21 22:20:47.667 +03:00 [INF] Removed socket 5f1ade11-b190-4f83-a6f5-9935e6a8dc04
+2025-09-21 22:20:47.678 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 37613.9823ms
+2025-09-21 22:20:47.687 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:20:47.694 +03:00 [INF] HTTP GET /api/websocket/ws responded 101 in 37684.6626 ms
+2025-09-21 22:20:47.702 +03:00 [INF] Completed HTTP request in 37697ms
+2025-09-21 22:20:47.707 +03:00 [INF] Request finished: 101
+2025-09-21 22:20:47.712 +03:00 [INF] HTTP GET /api/websocket/ws responded 101 in 37711.4654 ms
+2025-09-21 22:20:47.719 +03:00 [INF] Completed HTTP request in 37724ms
+2025-09-21 22:20:47.723 +03:00 [INF] Request finished: 101
+2025-09-21 22:20:47.730 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 37780.2957ms
+2025-09-21 22:21:53.505 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:21:53.520 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:21:53.526 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:21:53.529 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:21:53.536 +03:00 [INF] Incoming HTTP request
+2025-09-21 22:21:53.540 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:21:53.546 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:21:53.557 +03:00 [INF] Client connected: 2bd3d936-7418-49c6-a569-98dab5f2d0e9
+2025-09-21 22:21:53.562 +03:00 [INF] Added socket 2bd3d936-7418-49c6-a569-98dab5f2d0e9
+2025-09-21 22:21:55.764 +03:00 [INF] Message from 2bd3d936-7418-49c6-a569-98dab5f2d0e9: {
+  "type": "direct",
+  "message": "Hello everyone!",
+  "target":""
+}
+
+2025-09-21 22:21:55.769 +03:00 [INF] Received message: {
+  "type": "direct",
+  "message": "Hello everyone!",
+  "target":""
+}
+
+2025-09-21 22:22:05.854 +03:00 [INF] Message from 2bd3d936-7418-49c6-a569-98dab5f2d0e9: {
+  "type": "direct",
+  "message": "Hello everyone!",
+  "target":""
+}
+
+2025-09-21 22:22:05.859 +03:00 [INF] Received message: {
+  "type": "direct",
+  "message": "Hello everyone!",
+  "target":""
+}
+
+2025-09-21 22:22:58.236 +03:00 [INF] Application is shutting down...
+2025-09-21 22:23:28.250 +03:00 [INF] Connection cancelled for 2bd3d936-7418-49c6-a569-98dab5f2d0e9
+2025-09-21 22:23:28.258 +03:00 [INF] Executed action WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo) in 94701.8696ms
+2025-09-21 22:23:28.261 +03:00 [INF] Executed endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:23:28.263 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 94723.0942 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:23:28.294 +03:00 [ERR] HTTP GET /api/websocket/ws responded 500 in 94764.2069 ms
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-09-21 22:23:28.319 +03:00 [ERR] Connection id "0HNFP8FGP8ION", Request id "0HNFP8FGP8ION:00000001": An unhandled exception was thrown by the application.
+System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an invalid state ('Aborted') for this operation. Valid states are: 'Open, CloseReceived, CloseSent'
+   at System.Net.WebSockets.WebSocketValidate.ThrowIfInvalidState(WebSocketState currentState, Boolean isDisposed, WebSocketState[] validStates)
+   at System.Net.WebSockets.ManagedWebSocket.CloseAsync(WebSocketCloseStatus closeStatus, String statusDescription, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at WebSocketUtils.Connection.ConnectionManager.RemoveSocketAsync(String id) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Connection\ConnectionManager.cs:line 28
+   at WebSocketUtils.Demo.Controllers.WebSocketController.Get() in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo\WebSocketController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at WebSocketUtils.Middleware.TelemetryMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\TelemetryMiddleware.cs:line 29
+   at WebSocketUtils.Middleware.LoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\LoggingMiddleware.cs:line 23
+   at WebSocketUtils.Middleware.CorrelationMiddleware.InvokeAsync(HttpContext context) in C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils\Middleware\CorrelationMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-09-21 22:23:28.343 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 94838.9304ms

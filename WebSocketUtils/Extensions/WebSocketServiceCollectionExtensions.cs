@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using WebSocketUtils.Brokers;
 using WebSocketUtils.Connection;
 using WebSocketUtils.Demo.Options; // Now this will exist
-namespace WebSocketUtils.Demo.Extensions
+namespace WebSocketUtils.Extensions
 {
     public static class WebSocketServiceCollectionExtensions
     {
