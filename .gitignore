@@ -1,0 +1,64 @@
+# Build artifacts
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Packages
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+
+# Generated files
+Generated/
+Generated_Code/
+
+# Tests
+TestResults/
+coverage/
+*.trx
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Dotnet tools
+.tools/
+
+# ------------------------------------
+# Docker-related
+# ------------------------------------
+# Local Docker build cache
+**/docker-compose.override.yml
+**/docker-compose.override.*.yml
+
+# Ignore volumes & temp data
+**/docker-data/
+**/docker-volumes/
+**/docker-cache/
+**/tmp/
+
+# Ignore docker logs
+*.log
+*.tmp
+*.pid
+
+# Ignore Dockerfile build secrets
+.dockerignore
+.env
+.env.*
+secrets.json
+secrets/
