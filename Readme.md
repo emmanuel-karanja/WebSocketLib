@@ -57,7 +57,7 @@ flowchart LR
 
   * Accepts incoming `/ws` connections.
   * Validates IP limits and rejects connections exceeding the per-IP threshold.
-  * Generates `clientId` and delegates to `NotificationWebService`.
+  * Generates `clientId` and delegates to **NotificationWebService**.
 
 * **NotificationWebService**
 
@@ -134,12 +134,43 @@ flowchart LR
 | 6    | MessageDispatcher      | Dispatches to local clients or publishes to broker          |
 | 7    | ConnectionManager      | Sends message via WebSocket, maintains socket state         |
 
-This architecture clearly separates concerns:
+---
 
-* **Controller** → HTTP/WebSocket entry point
-* **NotificationWebService** → Connection lifecycle & business logic
-* **MessageDispatcher** → Message distribution & broker integration
-* **ConnectionManager** → Socket lifecycle, IP tracking, broadcast/direct sends
+## 💡 WebSocketService Use Cases
+
+The **WebSocketService** is fully pluggable and can source messages from anywhere depending on your business logic:
+
+### 1. Chat Application
+
+* Receives messages from clients.
+* Optionally filters messages.
+* Delegates delivery via MessageDispatcher.
+
+### 2. Trading / Stock Ticker
+
+* Subscribes to Kafka topic for price updates.
+* Filters/transforms events for clients.
+* Broadcasts updates via MessageDispatcher.
+
+### 3. IoT Sensor Dashboard
+
+* Pulls or subscribes to device data (Redis, MQTT, HTTP APIs).
+* Aggregates and normalizes telemetry.
+* Broadcasts to dashboards via MessageDispatcher.
+
+### 4. System Notifications / Alerts
+
+* Listens for events from internal services.
+* Formats messages for clients.
+* Sends targeted alerts via MessageDispatcher.
+
+**Key takeaway:** WebSocketService is **agnostic about the message source**. Its responsibilities:
+
+1. Understand the message content / business rules.
+2. Decide who should receive it.
+3. Delegate delivery to MessageDispatcher / ConnectionManager.
+
+Underlying layers handle **connection tracking, concurrency, broadcasting, per-IP limits, and optional broker integration**.
 
 ---
 
@@ -185,7 +216,7 @@ GET ws://localhost:5000/api/websocket/ws
 docker-compose up --build
 ```
 
-This starts:
+Starts:
 
 * WebSocketLib Demo API on `http://localhost:5000`
 * Kafka broker on `localhost:9092`
