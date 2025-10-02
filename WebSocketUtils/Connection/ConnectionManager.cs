@@ -7,20 +7,15 @@ namespace WebSocketUtils.Connection
 {
     /// <summary>
     /// ConnectionManager is a lightweight in-memory registry of active WebSocket connections.
-    /// 
-    /// Responsibilities:
-    /// - Track sockets by client ID
-    /// - Send messages to individual clients
-    /// - Broadcast messages to all connected clients
-    /// - Manage connection lifecycle (add/remove)
-    /// 
-    /// Note: This manager only handles sockets on the current server instance.
-    /// It does not handle cross-instance communication — that's where a broker comes in.
+    /// Tracks sockets by client ID and also maintains per-IP mappings.
     /// </summary>
     public class ConnectionManager
     {
         // Thread-safe dictionary of clientId → WebSocket
         private readonly ConcurrentDictionary<string, WebSocket> _sockets = new();
+
+        // Tracks IP → HashSet of clientIds
+        private readonly ConcurrentDictionary<string, HashSet<string>> _ipToClients = new();
 
         private readonly ILogger<ConnectionManager> _logger;
 
@@ -30,21 +25,46 @@ namespace WebSocketUtils.Connection
         }
 
         /// <summary>
-        /// Adds a WebSocket connection to the registry.
+        /// Adds a WebSocket connection to the registry with associated IP.
         /// </summary>
-        public void AddSocket(string id, WebSocket socket)
+        public void AddSocket(string clientId, WebSocket socket, string ip)
         {
-            _sockets.TryAdd(id, socket);
-            _logger.LogInformation("Added socket {Id}", id);
+            _sockets.TryAdd(clientId, socket);
+
+            var clients = _ipToClients.GetOrAdd(ip, _ => new HashSet<string>());
+            lock (clients) // lock needed because HashSet is not thread-safe
+            {
+                clients.Add(clientId);
+            }
+
+            _logger.LogInformation("Added socket {ClientId} for IP {IP}", clientId, ip);
         }
 
         /// <summary>
         /// Removes a WebSocket connection from the registry and closes it gracefully.
+        /// Also updates the IP → client map.
         /// </summary>
-        public async Task RemoveSocketAsync(string id)
+        public async Task RemoveSocketAsync(string clientId)
         {
-            if (_sockets.TryRemove(id, out var socket))
+            if (_sockets.TryRemove(clientId, out var socket))
             {
+                // Remove from IP mapping
+                foreach (var kvp in _ipToClients)
+                {
+                    var ip = kvp.Key;
+                    var clients = kvp.Value;
+
+                    lock (clients)
+                    {
+                        if (clients.Remove(clientId))
+                        {
+                            if (clients.Count == 0)
+                                _ipToClients.TryRemove(ip, out _);
+                            break;
+                        }
+                    }
+                }
+
                 try
                 {
                     if (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseReceived)
@@ -58,20 +78,32 @@ namespace WebSocketUtils.Connection
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Error closing socket {Id}", id);
+                    _logger.LogWarning(ex, "Error closing socket {ClientId}", clientId);
                 }
                 finally
                 {
-                    _logger.LogInformation("Removed socket {Id}", id);
+                    _logger.LogInformation("Removed socket {ClientId}", clientId);
                 }
             }
         }
 
         /// <summary>
-        /// Sends a message to a single client by ID.
-        /// If the socket is closed or fails, it will be removed.
-        /// Virtual so it can be overridden (e.g., in a brokered manager).
+        /// Get all clientIds for a given IP
         /// </summary>
+        public IReadOnlyCollection<string> GetConnectionsByIp(string ip)
+        {
+            if (_ipToClients.TryGetValue(ip, out var clients))
+            {
+                lock (clients)
+                {
+                    return clients.ToList().AsReadOnly();
+                }
+            }
+            return Array.Empty<string>();
+        }
+
+        // --------------------- Existing methods unchanged --------------------- //
+
         public virtual async Task SendMessageAsync(string clientId, string message, CancellationToken cancellationToken = default)
         {
             if (_sockets.TryGetValue(clientId, out var socket))
@@ -85,28 +117,22 @@ namespace WebSocketUtils.Connection
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogWarning(ex, "Failed to send message to {Id}, removing socket.", clientId);
+                        _logger.LogWarning(ex, "Failed to send message to {ClientId}, removing socket.", clientId);
                         await RemoveSocketAsync(clientId);
                     }
                 }
                 else
                 {
-                    // Socket is no longer usable
                     await RemoveSocketAsync(clientId);
                 }
             }
         }
 
-        /// <summary>
-        /// Broadcasts a message to all connected clients with throttled concurrency.
-        /// Prevents overwhelming the server when sending to thousands of sockets.
-        /// </summary>
         public async Task BroadcastAsync(string message, CancellationToken cancellationToken = default, int maxConcurrency = 100)
         {
             var buffer = Encoding.UTF8.GetBytes(message);
             using var throttler = new SemaphoreSlim(maxConcurrency);
 
-            // Async broadcasting
             var tasks = _sockets.Select(async entry =>
             {
                 await throttler.WaitAsync(cancellationToken);
@@ -122,7 +148,7 @@ namespace WebSocketUtils.Connection
                         }
                         catch (Exception ex)
                         {
-                            _logger.LogWarning(ex, "Failed to broadcast to {Id}, removing socket.", clientId);
+                            _logger.LogWarning(ex, "Failed to broadcast to {ClientId}, removing socket.", clientId);
                             await RemoveSocketAsync(clientId);
                         }
                     }
@@ -137,30 +163,16 @@ namespace WebSocketUtils.Connection
                 }
             });
 
-            // Wait for all throttled tasks
             await Task.WhenAll(tasks);
         }
 
-
-        /// <summary>
-        /// Gets the WebSocket associated with a client ID, or null if not found.
-        /// </summary>
         public WebSocket? GetSocket(string clientId)
         {
             _sockets.TryGetValue(clientId, out var socket);
             return socket;
         }
 
-        /// <summary>
-        /// Returns all active client IDs.
-        /// Useful for monitoring or admin tools.
-        /// </summary>
         public IEnumerable<string> GetAllIds() => _sockets.Keys;
-
-        /// <summary>
-        /// Internal method for retrieving a socket.
-        /// Functionally similar to GetSocket but bypasses logging/validation.
-        /// </summary>
         public WebSocket? GetSocketInternal(string clientId) =>
             _sockets.TryGetValue(clientId, out var socket) ? socket : null;
     }

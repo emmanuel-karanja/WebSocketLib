@@ -1,4 +1,6 @@
 using System;
+using System.Net.WebSockets;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +22,49 @@ namespace WebSocketUtils.Demo.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        /// <summary>
+        /// Manages the full lifecycle of a WebSocket connection:
+        /// - Receives messages
+        /// - Closes socket on disconnect/error
+        /// - Delegates message handling
+        /// </summary>
+        public async Task HandleConnectionAsync(string clientId, WebSocket webSocket, CancellationToken cancellationToken = default)
+        {
+            var buffer = new byte[4 * 1024];
+
+            try
+            {
+                while (webSocket.State == WebSocketState.Open && !cancellationToken.IsCancellationRequested)
+                {
+                    var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
+
+                    if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        await _manager.DisconnectClientAsync(clientId);
+                        break;
+                    }
+
+                    var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+
+                    // Delegate to existing message handler
+                    await HandleMessageAsync(clientId, message, cancellationToken);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                _logger.LogInformation("Connection handling canceled for {ClientId}", clientId);
+                await _manager.DisconnectClientAsync(clientId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in WebSocket connection for {ClientId}", clientId);
+                await _manager.DisconnectClientAsync(clientId);
+            }
+        }
+
+        /// <summary>
+        /// Handles incoming JSON messages: "broadcast" / "direct"
+        /// </summary>
         public async Task HandleMessageAsync(string clientId, string messageText, CancellationToken cancellationToken = default)
         {
             using (LogContext.PushProperty("ClientId", clientId))
@@ -38,11 +83,9 @@ namespace WebSocketUtils.Demo.Services
                             case "broadcast":
                                 await HandleBroadcastAsync(clientId, doc, cancellationToken);
                                 break;
-
                             case "direct":
                                 await HandleDirectAsync(clientId, doc, cancellationToken);
                                 break;
-
                             default:
                                 _logger.LogWarning("Unknown message type from {ClientId}: {Type}", clientId, type);
                                 await _manager.SendMessageAsync(clientId, $"[Error] Unknown type: {type}", cancellationToken);

@@ -41,39 +41,35 @@ namespace WebSocketUtils.Connection
 
         /// <summary>
         /// Handles a single WebSocket connection lifecycle:
-        /// - Registers socket with ConnectionManager
+        /// - Registers socket with ConnectionManager (with IP)
         /// - Listens for incoming client messages
-        /// - Supports simple text commands:
-        ///   - "SUB:topic" → subscribe client to a topic
-        ///   - "PUB:topic:payload" → publish payload to a topic
+        /// - Supports simple text commands: "SUB:topic" / "PUB:topic:payload"
         /// - Cleans up on socket close/error
         /// </summary>
         public async Task HandleConnectionAsync(
             string clientId,
             WebSocket socket,
+            string ip,
             CancellationToken cancellationToken = default)
         {
-            // Register socket locally
-            _connectionManager.AddSocket(clientId, socket);
+            // Register socket locally with IP info
+            _connectionManager.AddSocket(clientId, socket, ip);
             _clientTopics[clientId] = new HashSet<string>();
 
             var buffer = new byte[1024 * 4];
 
             try
             {
-                // Main receive loop
                 while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
                     var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
 
-                    // If client closed connection
                     if (result.MessageType == WebSocketMessageType.Close)
                     {
                         await RemoveClientAsync(clientId);
                         break;
                     }
 
-                    // Decode message
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     _logger.LogInformation("Received from {ClientId}: {Message}", clientId, message);
 
@@ -110,18 +106,15 @@ namespace WebSocketUtils.Connection
 
         /// <summary>
         /// Subscribes a client to a given topic.
-        /// Ensures:
-        /// - Only one broker subscription per topic per server instance
-        /// - Local fan-out delivers messages to all clients subscribed to that topic
+        /// Ensures one broker subscription per topic per server instance
+        /// and fan-out to all clients subscribed locally.
         /// </summary>
         private async Task SubscribeClientToTopicAsync(string clientId, string topic)
         {
-            // Subscribe server instance to broker topic if not already
             if (!_subscribedTopics.Contains(topic))
             {
                 _subscribedTopics.Add(topic);
 
-                // One subscription per topic, local fan-out to clients
                 await _broker.SubscribeAsync(topic, async message =>
                 {
                     foreach (var kvp in _clientTopics)
@@ -137,14 +130,12 @@ namespace WebSocketUtils.Connection
                 _logger.LogInformation("Subscribed server to topic {Topic}", topic);
             }
 
-            // Track client subscription
             _clientTopics[clientId].Add(topic);
             _logger.LogInformation("Client {ClientId} subscribed to {Topic}", clientId, topic);
         }
 
         /// <summary>
         /// Removes client from local registries and closes socket.
-        /// Called when a connection is closed or errors out.
         /// </summary>
         private async Task RemoveClientAsync(string clientId)
         {
@@ -154,26 +145,16 @@ namespace WebSocketUtils.Connection
             await _connectionManager.RemoveSocketAsync(clientId);
         }
 
-        /// <summary>
-        /// Send a direct message to one client by ID.
-        /// </summary>
         public async Task SendMessageAsync(string clientId, string message, CancellationToken cancellationToken = default)
         {
             await _connectionManager.SendMessageAsync(clientId, message, cancellationToken);
         }
 
-        /// <summary>
-        /// Broadcast a message to all clients connected to this server instance.
-        /// (Does not go through broker).
-        /// </summary>
         public async Task BroadcastMessageAsync(string message, CancellationToken cancellationToken = default)
         {
             await _connectionManager.BroadcastAsync(message, cancellationToken);
         }
 
-        /// <summary>
-        /// Returns a snapshot of all connected clients and their sockets.
-        /// </summary>
         public IDictionary<string, WebSocket> GetAllSockets()
         {
             return _connectionManager
@@ -182,5 +163,10 @@ namespace WebSocketUtils.Connection
                 .Where(x => x.Socket != null)
                 .ToDictionary(x => x.Id, x => x.Socket!);
         }
+        public async Task DisconnectClientAsync(string clientId)
+        {
+            await RemoveClientAsync(clientId);
+        }
+
     }
 }

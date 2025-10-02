@@ -2,11 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.WebSockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using WebSocketUtils.Connection;
 using WebSocketUtils.Services;
+using WebSocketUtils.Connection;
 
 namespace WebSocketUtils.Demo.Controllers
 {
@@ -14,21 +13,22 @@ namespace WebSocketUtils.Demo.Controllers
     [Route("api/[controller]")]
     public class WebSocketController : ControllerBase
     {
-        private readonly BrokeredConnectionManager _manager;
-        private readonly IWebSocketService _messageHandler;  // 👈 use the interface
+        private readonly IWebSocketService _notificationService;
         private readonly ILogger<WebSocketController> _logger;
+        private readonly ConnectionManager _connectionManager;
+
+        private const int MAX_CONNECTIONS_PER_IP = 5; // example limit
 
         public WebSocketController(
-            BrokeredConnectionManager manager,
-            IWebSocketService messageHandler,  // 👈 inject interface
+            IWebSocketService notificationService,
+            ConnectionManager connectionManager,
             ILogger<WebSocketController> logger)
         {
-            _manager = manager ?? throw new ArgumentNullException(nameof(manager));
-            _messageHandler = messageHandler ?? throw new ArgumentNullException(nameof(messageHandler));
+            _notificationService = notificationService ?? throw new ArgumentNullException(nameof(notificationService));
+            _connectionManager = connectionManager ?? throw new ArgumentNullException(nameof(connectionManager));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        // GET /api/websocket/ws
         [HttpGet("ws")]
         public async Task Get()
         {
@@ -38,45 +38,28 @@ namespace WebSocketUtils.Demo.Controllers
                 return;
             }
 
+            var ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+            // Limit connections per IP
+            var currentConnections = _connectionManager.GetConnectionsByIp(ip).Count;
+            if (currentConnections >= MAX_CONNECTIONS_PER_IP)
+            {
+                _logger.LogWarning("Connection limit reached for IP {IP}", ip);
+                HttpContext.Response.StatusCode = 429; // Too Many Requests
+                return;
+            }
+
             var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
             var clientId = Guid.NewGuid().ToString();
             var cancellationToken = HttpContext.RequestAborted;
 
-            _logger.LogInformation("Client connected: {ClientId}", clientId);
+            _logger.LogInformation("Client connected: {ClientId} from IP {IP}", clientId, ip);
 
-            _manager.AddSocket(clientId, webSocket);
+            // Register socket in ConnectionManager with IP info
+            _connectionManager.AddSocket(clientId, webSocket, ip);
 
-            var buffer = new byte[1024 * 4];
-
-            try
-            {
-                while (webSocket.State == WebSocketState.Open && !cancellationToken.IsCancellationRequested)
-                {
-                    var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
-
-                    if (result.MessageType == WebSocketMessageType.Close)
-                    {
-                        await _manager.RemoveSocketAsync(clientId);
-                        _logger.LogInformation("Client disconnected: {ClientId}", clientId);
-                        break;
-                    }
-
-                    var messageText = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    _logger.LogInformation("Message from {ClientId}: {Message}", clientId, messageText);
-
-                    await _messageHandler.HandleMessageAsync(clientId, messageText, cancellationToken);
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                _logger.LogInformation("Connection cancelled for {ClientId}", clientId);
-                await _manager.RemoveSocketAsync(clientId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error handling WebSocket for {ClientId}", clientId);
-                await _manager.RemoveSocketAsync(clientId);
-            }
+            // Delegate lifecycle to NotificationWebService
+            await _notificationService.HandleConnectionAsync(clientId, webSocket, cancellationToken);
         }
     }
 }

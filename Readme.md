@@ -1,13 +1,14 @@
 # WebSocketLib
 
-A .NET library for managing **WebSocket connections** with support for **message broadcasting, direct messaging, Kafka integration, and Redis caching**.
+A .NET library for managing **WebSocket connections** with support for **message broadcasting, direct messaging, Kafka integration, Redis caching, and per-IP connection limiting**.
 Built with ASP.NET Core and designed for **scalable real-time communication**.
 
 ---
 
 ## ✨ Features
 
-* Manage multiple WebSocket client connections.
+* Manage multiple WebSocket client connections with **IP tracking**.
+* Limit the number of connections per IP to prevent abuse.
 * Broadcast messages to all clients with **concurrent + fault-tolerant sending**.
 * Automatic cleanup of **dead or broken sockets**.
 * Optional **throttling / batching** to smooth out high-throughput events.
@@ -16,7 +17,7 @@ Built with ASP.NET Core and designed for **scalable real-time communication**.
 * Kafka integration for message streaming across services.
 * Redis integration for connection management and caching.
 * Middleware for logging and telemetry.
-* **Message shape and schema determined by the WebSocketService**, allowing flexibility in defining the contract and business logic.
+* **Message shape and schema determined by the WebSocketService**, allowing flexible contracts.
 
 ---
 
@@ -34,9 +35,9 @@ flowchart LR
 
     subgraph Server["WebSocket Server"]
         C["WebSocketController"]
-        S["WebSocketService (Business Logic)"]
-        CM["ConnectionManager"]
+        S["NotificationWebService (Business Logic)"]
         BCM["BrokeredConnectionManager"]
+        CM["ConnectionManager (IP-aware, per-IP limits)"]
 
         C --> S
         S --> BCM
@@ -52,21 +53,24 @@ flowchart LR
     BCM -->|Publish/Subscribe| K
 ```
 
-* **ConnectionManager**
-  Handles socket lifecycle (add/remove), direct sends, and **concurrent broadcasts with fault-tolerance**.
+* **WebSocketController**
+  Accepts incoming `/ws` connections, validates IP limits, generates `clientId`, and delegates to `NotificationWebService`.
+
+* **NotificationWebService**
+  Handles the WebSocket **lifecycle** (receive loop, disconnects) and delegates message handling (`broadcast` / `direct`) to `BrokeredConnectionManager`.
 
 * **BrokeredConnectionManager**
-  Subscribes to external brokers (Kafka, Redis pub/sub) and relays messages into the active connections.
-  Useful when running **multiple server instances** or handling **event streams**.
+  Integrates **local sockets** with external brokers (Kafka/Redis) and manages topic subscriptions.
+  Broadcasts messages to clients, supports pub/sub, and keeps the server instance synchronized.
 
-* **WebSocketService**
-  Contains **business logic** and determines the **shape of messages** exchanged with clients. It delegates distribution to the brokered manager without worrying about concurrency or infrastructure.
+* **ConnectionManager**
+  Maintains a **thread-safe registry** of active sockets, tracks **clientId → IP**, enforces **per-IP connection limits**, sends direct messages, and handles concurrent broadcast.
 
 * **Redis**
-  Can be used for connection metadata and lightweight pub/sub.
+  Optional: connection metadata and lightweight pub/sub.
 
 * **Kafka**
-  For scalable, high-throughput event streaming and cross-service communication.
+  Optional: scalable, high-throughput event streaming and cross-service communication.
 
 ---
 
@@ -159,7 +163,7 @@ docker-compose down
    }
    ```
 
-> **Note:** The shape of messages may vary depending on the **WebSocketService** implementation in your project.
+> **Note:** Messages are handled by **NotificationWebService**, which delegates to **BrokeredConnectionManager** for delivery and optional broker integration.
 
 ---
 
@@ -169,15 +173,15 @@ docker-compose down
 WebSocketLib/
 │
 ├── WebSocketUtils/                # Core WebSocket utilities
-│   ├── Connection/                 # Connection manager & handlers
+│   ├── Connection/                 # ConnectionManager & BrokeredConnectionManager
 │   ├── Middleware/                 # Logging & telemetry middleware
 │   ├── WebSocketUtils.csproj
 │
 ├── WebSocketUtils.Demo/           # Demo ASP.NET Core project
-│   ├── Controllers/                # WebSocket endpoints
-│   ├── Extensions/                 # Extension methods for DI/config
-│   ├── Options/                    # Options & configuration bindings
-│   ├── Services/                   # Demo services (Kafka, Redis)
+│   ├── Controllers/                # WebSocket endpoints (WebSocketController)
+│   ├── Services/                   # NotificationWebService + Kafka/Redis services
+│   ├── Extensions/                 # DI/configuration helpers
+│   ├── Options/                    # Config binding classes
 │   ├── WebSocketUtils.Demo.csproj
 │
 ├── WebSocketUtils.Tests/          # Unit and integration tests
@@ -206,10 +210,4 @@ dotnet test
 2. Create a feature branch (`git checkout -b feature/my-feature`).
 3. Commit your changes (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature/my-feature`).
-5. Open a Pull Request.
-
----
-
-## 📜 License
-
-MIT License. See [LICENSE](LICENSE) for details.
+5. Open a Pul
