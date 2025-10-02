@@ -34,7 +34,7 @@ builder.Services.AddWebSocketBrokers(options =>
 
 // Register ConnectionManager and BrokeredConnectionManager in DI
 builder.Services.AddSingleton<ConnectionManager>();
-builder.Services.AddSingleton<BrokeredConnectionManager>();
+builder.Services.AddSingleton<MessageDispatcher>();
 
 // Register WebSocket services
 builder.Services.AddSingleton<IWebSocketService, NotificationWebService>();

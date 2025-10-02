@@ -36,12 +36,12 @@ flowchart LR
     subgraph Server["WebSocket Server"]
         C["WebSocketController"]
         S["NotificationWebService (Business Logic)"]
-        BCM["BrokeredConnectionManager"]
+        MD["MessageDispatcher"]
         CM["ConnectionManager (IP-aware, per-IP limits)"]
 
         C --> S
-        S --> BCM
-        BCM --> CM
+        S --> MD
+        MD --> CM
     end
 
     subgraph Infra["Infrastructure"]
@@ -49,17 +49,17 @@ flowchart LR
         K["Kafka (pub/sub streaming)"]
     end
 
-    BCM -->|Publish/Subscribe| R
-    BCM -->|Publish/Subscribe| K
+    MD -->|Publish/Subscribe| R
+    MD -->|Publish/Subscribe| K
 ```
 
 * **WebSocketController**
   Accepts incoming `/ws` connections, validates IP limits, generates `clientId`, and delegates to `NotificationWebService`.
 
 * **NotificationWebService**
-  Handles the WebSocket **lifecycle** (receive loop, disconnects) and delegates message handling (`broadcast` / `direct`) to `BrokeredConnectionManager`.
+  Handles the WebSocket **lifecycle** (receive loop, disconnects) and delegates message handling (`broadcast` / `direct`) to **MessageDispatcher**.
 
-* **BrokeredConnectionManager**
+* **MessageDispatcher**
   Integrates **local sockets** with external brokers (Kafka/Redis) and manages topic subscriptions.
   Broadcasts messages to clients, supports pub/sub, and keeps the server instance synchronized.
 
@@ -163,7 +163,7 @@ docker-compose down
    }
    ```
 
-> **Note:** Messages are handled by **NotificationWebService**, which delegates to **BrokeredConnectionManager** for delivery and optional broker integration.
+> **Note:** Messages are handled by **NotificationWebService**, which delegates to **MessageDispatcher** for delivery and optional broker integration.
 
 ---
 
@@ -173,7 +173,7 @@ docker-compose down
 WebSocketLib/
 │
 ├── WebSocketUtils/                # Core WebSocket utilities
-│   ├── Connection/                 # ConnectionManager & BrokeredConnectionManager
+│   ├── Connection/                 # ConnectionManager & MessageDispatcher
 │   ├── Middleware/                 # Logging & telemetry middleware
 │   ├── WebSocketUtils.csproj
 │
@@ -210,4 +210,10 @@ dotnet test
 2. Create a feature branch (`git checkout -b feature/my-feature`).
 3. Commit your changes (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature/my-feature`).
-5. Open a Pul
+5. Open a Pull Request.
+
+---
+
+## 📜 License
+
+MIT License. See [LICENSE](LICENSE)

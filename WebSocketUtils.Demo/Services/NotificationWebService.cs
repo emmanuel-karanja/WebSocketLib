@@ -13,12 +13,12 @@ namespace WebSocketUtils.Demo.Services
 {
     public class NotificationWebService : IWebSocketService
     {
-        private readonly BrokeredConnectionManager _manager;
+        private readonly MessageDispatcher _dispatcher;
         private readonly ILogger<NotificationWebService> _logger;
 
-        public NotificationWebService(BrokeredConnectionManager manager, ILogger<NotificationWebService> logger)
+        public NotificationWebService(MessageDispatcher dispatcher, ILogger<NotificationWebService> logger)
         {
-            _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -40,7 +40,7 @@ namespace WebSocketUtils.Demo.Services
 
                     if (result.MessageType == WebSocketMessageType.Close)
                     {
-                        await _manager.DisconnectClientAsync(clientId);
+                        await _dispatcher.DisconnectClientAsync(clientId);
                         break;
                     }
 
@@ -53,12 +53,12 @@ namespace WebSocketUtils.Demo.Services
             catch (OperationCanceledException)
             {
                 _logger.LogInformation("Connection handling canceled for {ClientId}", clientId);
-                await _manager.DisconnectClientAsync(clientId);
+                await _dispatcher.DisconnectClientAsync(clientId);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error in WebSocket connection for {ClientId}", clientId);
-                await _manager.DisconnectClientAsync(clientId);
+                await _dispatcher.DisconnectClientAsync(clientId);
             }
         }
 
@@ -88,7 +88,7 @@ namespace WebSocketUtils.Demo.Services
                                 break;
                             default:
                                 _logger.LogWarning("Unknown message type from {ClientId}: {Type}", clientId, type);
-                                await _manager.SendMessageAsync(clientId, $"[Error] Unknown type: {type}", cancellationToken);
+                                await _dispatcher.SendMessageAsync(clientId, $"[Error] Unknown type: {type}", cancellationToken);
                                 break;
                         }
                     }
@@ -96,7 +96,7 @@ namespace WebSocketUtils.Demo.Services
                 catch (JsonException)
                 {
                     _logger.LogWarning("Invalid message format from {ClientId}: {Message}", clientId, messageText);
-                    await _manager.SendMessageAsync(clientId, $"[Echo] {messageText}", cancellationToken);
+                    await _dispatcher.SendMessageAsync(clientId, $"[Echo] {messageText}", cancellationToken);
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace WebSocketUtils.Demo.Services
             if (!string.IsNullOrWhiteSpace(msg))
             {
                 _logger.LogInformation("Broadcasting message from {ClientId}: {Message}", clientId, msg);
-                await _manager.BroadcastMessageAsync($"[Broadcast from {clientId}]: {msg}", cancellationToken);
+                await _dispatcher.BroadcastMessageAsync($"[Broadcast from {clientId}]: {msg}", cancellationToken);
             }
         }
 
@@ -119,7 +119,7 @@ namespace WebSocketUtils.Demo.Services
             if (!string.IsNullOrWhiteSpace(target) && !string.IsNullOrWhiteSpace(msg))
             {
                 _logger.LogInformation("Sending direct message from {ClientId} to {Target}: {Message}", clientId, target, msg);
-                await _manager.SendMessageAsync(target, $"[Direct from {clientId}]: {msg}", cancellationToken);
+                await _dispatcher.SendMessageAsync(target, $"[Direct from {clientId}]: {msg}", cancellationToken);
             }
         }
     }

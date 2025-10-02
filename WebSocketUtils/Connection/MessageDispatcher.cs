@@ -16,11 +16,11 @@ namespace WebSocketUtils.Connection
     /// This pattern allows scaling WebSocket servers horizontally while keeping
     /// topic-based pub-sub semantics consistent across instances.
     /// </summary>
-    public class BrokeredConnectionManager
+    public class MessageDispatcher
     {
         private readonly IMessageBroker _broker;               // External broker (Redis, Kafka, NATS, etc.)
         private readonly ConnectionManager _connectionManager; // Local socket registry
-        private readonly ILogger<BrokeredConnectionManager> _logger;
+        private readonly ILogger<MessageDispatcher> _logger;
 
         // Tracks which topics each clientId is subscribed to
         private readonly Dictionary<string, HashSet<string>> _clientTopics = new();
@@ -29,10 +29,10 @@ namespace WebSocketUtils.Connection
         // → prevents duplicate broker subscriptions
         private readonly HashSet<string> _subscribedTopics = new();
 
-        public BrokeredConnectionManager(
+        public MessageDispatcher(
             IMessageBroker broker,
             ConnectionManager connectionManager,
-            ILogger<BrokeredConnectionManager> logger)
+            ILogger<MessageDispatcher> logger)
         {
             _broker = broker;
             _connectionManager = connectionManager;
