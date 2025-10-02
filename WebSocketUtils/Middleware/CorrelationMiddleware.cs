@@ -1,6 +1,6 @@
 // CorrelationMiddleware.cs
 using Microsoft.AspNetCore.Http;
-using Serilog.Context;
+using Serilog;
 using System;
 using System.Threading.Tasks;
 

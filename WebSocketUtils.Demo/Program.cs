@@ -32,7 +32,11 @@ builder.Services.AddWebSocketBrokers(options =>
     options.KafkaBootstrapServers = builder.Configuration["WebSocketDemo:Kafka:BootstrapServers"] ?? "";
 });
 
+// Register ConnectionManager and BrokeredConnectionManager in DI
+builder.Services.AddSingleton<ConnectionManager>();
 builder.Services.AddSingleton<BrokeredConnectionManager>();
+
+// Register WebSocket services
 builder.Services.AddSingleton<IWebSocketService, NotificationWebService>();
 
 // Add controllers
@@ -43,20 +47,13 @@ var app = builder.Build();
 // ----------------------------
 // Middleware pipeline
 // ----------------------------
-// CorrelationID added
-// Correlation first
+// CorrelationID middleware first
 app.UseMiddleware<CorrelationMiddleware>();
 
-// Then your logging & telemetry
+// Custom logging and telemetry middleware
 app.UseLoggingAndTelemetry();
 
 // Built-in Serilog request logging
-app.UseSerilogRequestLogging();
-
-// Request logging and telemetry (custom middlewares)
-app.UseLoggingAndTelemetry();
-
-// Built-in ASP.NET logging (optional, but helps debug)
 app.UseSerilogRequestLogging();
 
 // Enable WebSockets globally
