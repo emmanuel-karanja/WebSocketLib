@@ -26,11 +26,12 @@ namespace WebSocketUtils.Extensions
             });
 
             // Add BrokeredConnectionManager
-            services.AddSingleton<BrokeredConnectionManager>(sp =>
+            services.AddSingleton<MessageDispatcher>(sp =>
             {
                 var broker = sp.GetRequiredService<IMessageBroker>();
-                var logger = sp.GetRequiredService<ILogger<BrokeredConnectionManager>>();
-                return new BrokeredConnectionManager(broker, logger);
+                var logger = sp.GetRequiredService<ILogger<MessageDispatcher>>();
+                var connectionManager = sp.GetRequiredService<ConnectionManager>();
+                return new MessageDispatcher(broker,connectionManager, logger);
             });
 
             return services;

@@ -1,8 +1,6 @@
 // CorrelationMiddleware.cs
 using Microsoft.AspNetCore.Http;
-using Serilog;
-using System;
-using System.Threading.Tasks;
+using Serilog.Context;
 
 namespace WebSocketUtils.Middleware
 {
