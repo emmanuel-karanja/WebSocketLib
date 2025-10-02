@@ -1,18 +1,63 @@
 # WebSocketLib
 
-A .NET library for managing **WebSocket connections** with support for **message broadcasting, direct messaging, Kafka integration, and Redis caching**. Built with ASP.NET Core and designed for scalable real-time communication.
+A .NET library for managing **WebSocket connections** with support for **message broadcasting, direct messaging, Kafka integration, and Redis caching**.
+Built with ASP.NET Core and designed for **scalable real-time communication**.
 
 ---
 
 ## ✨ Features
 
 * Manage multiple WebSocket client connections.
-* Broadcast messages to all clients.
+* Broadcast messages to all clients with **concurrent + fault-tolerant sending**.
+* Automatic cleanup of **dead or broken sockets**.
+* Optional **throttling / batching** to smooth out high-throughput events.
 * Send direct messages to specific clients.
 * Structured message handling with JSON.
-* Kafka integration for message streaming.
+* Kafka integration for message streaming across services.
 * Redis integration for connection management and caching.
 * Middleware for logging and telemetry.
+
+---
+
+## 🏗️ Architecture
+
+Below is how the components interact in a real-world WebSocket server:
+
+```mermaid
+flowchart LR
+    subgraph Client["WebSocket Clients"]
+        A1["Client 1"] -->|Send/Receive| S1
+        A2["Client 2"] -->|Send/Receive| S1
+        A3["Client N"] -->|Send/Receive| S1
+    end
+
+    subgraph Server["WebSocket Server"]
+        S1["ConnectionManager"]
+        S2["BrokeredConnectionManager"]
+        S1 <--> S2
+    end
+
+    subgraph Infra["Infrastructure"]
+        R["Redis (cache & connection metadata)"]
+        K["Kafka (pub/sub streaming)"]
+    end
+
+    S2 -->|Publish/Subscribe| R
+    S2 -->|Publish/Subscribe| K
+```
+
+* **ConnectionManager**
+  Handles socket lifecycle (add/remove), direct sends, and **concurrent broadcasts with fault-tolerance**.
+
+* **BrokeredConnectionManager**
+  Subscribes to external brokers (Kafka, Redis pub/sub) and relays messages into the active connections.
+  Useful when running **multiple server instances** or handling **event streams**.
+
+* **Redis**
+  Can be used for connection metadata and lightweight pub/sub.
+
+* **Kafka**
+  For scalable, high-throughput event streaming and cross-service communication.
 
 ---
 
@@ -82,7 +127,7 @@ docker-compose down
 
 1. Open a WebSocket connection to:
 
-   ```
+   ```bash
    ws://localhost:5000/api/websocket/ws
    ```
 
@@ -129,8 +174,7 @@ WebSocketLib/
 ├── docker-compose.yml             # Local environment (WebSocket + Kafka + Redis)
 ├── Dockerfile                     # Container build file
 ├── .gitignore
-├── README.md
-                  # Project documentation
+├── README.md                      # Project documentation
 ```
 
 ---

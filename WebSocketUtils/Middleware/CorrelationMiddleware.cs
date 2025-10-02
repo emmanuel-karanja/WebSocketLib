@@ -22,7 +22,7 @@ namespace WebSocketUtils.Middleware
 
             using (LogContext.PushProperty("CorrelationId", correlationId))
             {
-                context.Response.Headers.Add("X-Correlation-Id", correlationId);
+                context.Response.Headers.Append("X-Correlation-Id", correlationId);
                 await _next(context);
             }
         }

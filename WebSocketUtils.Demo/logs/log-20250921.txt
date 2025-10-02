@@ -569,3 +569,33 @@ System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an in
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
 2025-09-21 22:57:13.853 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/websocket/ws - 101 null null 49418.7608ms
+2025-09-21 22:59:45.450 +03:00 [INF] Now listening on: http://localhost:5000
+2025-09-21 22:59:45.503 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-21 22:59:45.509 +03:00 [INF] Hosting environment: Production
+2025-09-21 22:59:45.515 +03:00 [INF] Content root path: C:\Users\ZBOOK\WebSocketsLib\WebSocketUtils.Demo
+2025-09-21 22:59:50.204 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/websocket/ws - null null
+2025-09-21 22:59:50.236 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:59:50.244 +03:00 [INF] Request starting: GET /api/websocket/ws
+2025-09-21 22:59:50.248 +03:00 [INF] Executing endpoint 'WebSocketUtils.Demo.Controllers.WebSocketController.Get (WebSocketUtils.Demo)'
+2025-09-21 22:59:50.285 +03:00 [INF] Route matched with {action = "Get", controller = "WebSocket"}. Executing controller action with signature System.Threading.Tasks.Task Get() on controller WebSocketUtils.Demo.Controllers.WebSocketController (WebSocketUtils.Demo).
+2025-09-21 22:59:50.646 +03:00 [INF] Client connected: b69a786a-7b6c-490e-ad4d-442dcf9af8e4
+2025-09-21 22:59:50.652 +03:00 [INF] Added socket b69a786a-7b6c-490e-ad4d-442dcf9af8e4
+2025-09-21 23:00:00.547 +03:00 [INF] Message from b69a786a-7b6c-490e-ad4d-442dcf9af8e4: {
+    "type":"broadcast",
+    "message":"hello"
+}
+2025-09-21 23:00:00.553 +03:00 [INF] Received message: {
+    "type":"broadcast",
+    "message":"hello"
+}
+2025-09-21 23:00:00.569 +03:00 [INF] Broadcasting message from b69a786a-7b6c-490e-ad4d-442dcf9af8e4: hello
+2025-09-21 23:00:24.098 +03:00 [INF] Message from b69a786a-7b6c-490e-ad4d-442dcf9af8e4: {
+    "type":"direct",
+    "message":"hello",
+    "target":""
+}
+2025-09-21 23:00:24.105 +03:00 [INF] Received message: {
+    "type":"direct",
+    "message":"hello",
+    "target":""
+}
