@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebSocketUtils.Services;
 using WebSocketUtils.Connection;
+using System.Linq;
 
 namespace WebSocketUtils.Demo.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebSocketUtils.Demo.Controllers
         private readonly ILogger<WebSocketController> _logger;
         private readonly ConnectionManager _connectionManager;
 
-        private const int MAX_CONNECTIONS_PER_IP = 5; // example limit
+        private const int MAX_CONNECTIONS_PER_IP = 50; // example limit
 
         public WebSocketController(
             IWebSocketService notificationService,
@@ -38,7 +39,9 @@ namespace WebSocketUtils.Demo.Controllers
                 return;
             }
 
-            var ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+            var ip = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault() 
+                ?? HttpContext.Connection.RemoteIpAddress?.ToString();
+
 
             // Limit connections per IP
             var currentConnections = _connectionManager.GetConnectionsByIp(ip).Count;
