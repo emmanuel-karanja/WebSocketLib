@@ -16,6 +16,7 @@ Built with ASP.NET Core and designed for **scalable real-time communication**.
 * Kafka integration for message streaming across services.
 * Redis integration for connection management and caching.
 * Middleware for logging and telemetry.
+* **Message shape and schema determined by the WebSocketService**, allowing flexibility in defining the contract and business logic.
 
 ---
 
@@ -26,15 +27,20 @@ Below is how the components interact in a real-world WebSocket server:
 ```mermaid
 flowchart LR
     subgraph Client["WebSocket Clients"]
-        A1["Client 1"] -->|Send/Receive| S1
-        A2["Client 2"] -->|Send/Receive| S1
-        A3["Client N"] -->|Send/Receive| S1
+        A1["Client 1"] -->|Send/Receive| C
+        A2["Client 2"] -->|Send/Receive| C
+        A3["Client N"] -->|Send/Receive| C
     end
 
     subgraph Server["WebSocket Server"]
-        S1["ConnectionManager"]
-        S2["BrokeredConnectionManager"]
-        S1 <--> S2
+        C["WebSocketController"]
+        S["WebSocketService (Business Logic)"]
+        CM["ConnectionManager"]
+        BCM["BrokeredConnectionManager"]
+
+        C --> S
+        S --> BCM
+        BCM --> CM
     end
 
     subgraph Infra["Infrastructure"]
@@ -42,8 +48,8 @@ flowchart LR
         K["Kafka (pub/sub streaming)"]
     end
 
-    S2 -->|Publish/Subscribe| R
-    S2 -->|Publish/Subscribe| K
+    BCM -->|Publish/Subscribe| R
+    BCM -->|Publish/Subscribe| K
 ```
 
 * **ConnectionManager**
@@ -52,6 +58,9 @@ flowchart LR
 * **BrokeredConnectionManager**
   Subscribes to external brokers (Kafka, Redis pub/sub) and relays messages into the active connections.
   Useful when running **multiple server instances** or handling **event streams**.
+
+* **WebSocketService**
+  Contains **business logic** and determines the **shape of messages** exchanged with clients. It delegates distribution to the brokered manager without worrying about concurrency or infrastructure.
 
 * **Redis**
   Can be used for connection metadata and lightweight pub/sub.
@@ -149,6 +158,8 @@ docker-compose down
      "message": "Hello friend!"
    }
    ```
+
+> **Note:** The shape of messages may vary depending on the **WebSocketService** implementation in your project.
 
 ---
 

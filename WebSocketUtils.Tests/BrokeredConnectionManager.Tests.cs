@@ -16,6 +16,8 @@ namespace WebSocketUtils.Tests
         {
             brokerMock = new Mock<IMessageBroker>();
             loggerMock = new Mock<ILogger<BrokeredConnectionManager>>();
+            
+
             return new BrokeredConnectionManager(brokerMock.Object, loggerMock.Object);
         }
 
